@@ -1,13 +1,28 @@
 <template>
  <div class="home">
     <h1>Homepage</h1>
-    <p class="red white--text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium modi perferendis nemo adipisci laboriosam magni, facere eum! Atque dolores et soluta, illo obcaecati culpa porro cupiditate nam minima quaerat corrupti.</p>
-    <p class="pink lighten-4 red--text text--darken-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti sunt quam placeat porro quis non cum aliquam, necessitatibus, officiis, eaque unde odit exercitationem consectetur quidem quasi odio error veritatis voluptate?</p>
-    <h1 class="display-4">Massive Display</h1>
-    <h4 class="display-1">Smaller Display</h4>
-    <p class="headline">This is a headline</p>
-    <p class="subheading font-weight-bold">This is a subheading</p>
-    <p class="caption">This is caption</p>
+    <v-btn class="pink white--text mx-2">click me</v-btn>
+    <v-btn depressed dark color="pink" class="mr-2">click me</v-btn>
+    <v-btn text color="pink">click me</v-btn>
+
+    <v-btn depressed class="pink white--text mr-2">
+      <v-icon left>mdi-email</v-icon>
+      <span>email me</span>
+    </v-btn>
+
+    <v-btn depressed small class="pink white--text mr-2">
+      <v-icon left small>mdi-email</v-icon>
+      <span>email me</span>
+    </v-btn>
+
+    <v-btn depressed large class="pink white--text mr-2">
+      <span>email me</span>
+      <v-icon right large >mdi-email</v-icon>
+    </v-btn>
+
+    <v-btn fab depressed small dark color="purple">
+      <v-icon small>mdi-heart</v-icon>
+    </v-btn>
   </div>
 </template>
 
