@@ -15,7 +15,6 @@ import Navbar from '@/components/Navbar.vue'
 export default Vue.extend({
   name: 'App',
   components: {
-    // eslint-disable-next-line vue/no-unused-components
     Navbar
   },
   data: () => ({
