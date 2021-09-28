@@ -1,7 +1,7 @@
 <template>
   <v-app class="grey lighten-4" >
     <v-container fluid fill-height class="grey lighten-4">
-      <v-row style="height: 100%">
+      <v-row style="height:100%">
         <Navbar/>
         <v-main class="mb-4">
         <router-view/>
