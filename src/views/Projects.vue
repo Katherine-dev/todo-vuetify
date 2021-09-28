@@ -1,7 +1,7 @@
 <template>
- <div class="projects">
+ <div class="projects" style="height:100%">
     <v-subheader class="grey--text">Projects</v-subheader>
-      <v-container class="my-5 mx-4">
+      <v-container fill-height class="my-5 mx-4" style="align-items: flex-start">
         content
       </v-container>
   </div>
