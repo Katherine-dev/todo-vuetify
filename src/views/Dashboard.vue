@@ -1,7 +1,17 @@
 <template>
- <div class="dashboard" style="height:100%; overflow-y:scroll;">
-    <v-subheader class="grey--text">Dashboard</v-subheader>
+ <div class="dashboard" style="height:100%; overflow-y:scroll; -webkit-overflow-scrolling: touch;overflow-y: scroll;">
+    <v-subheader  class="grey--text ">Dashboard</v-subheader>
       <v-container fill-height class="my-5" style="align-content: flex-start">
+        <v-row class="mb-3">
+          <v-btn small text color="grey" @click="sortBy(`title`)">
+            <v-icon left small depressed>mdi-folder</v-icon>
+            <span class="caption text-lowercase">by project name</span>
+          </v-btn>
+          <v-btn small text color="grey" @click="sortBy(`person`)">
+            <v-icon left small depressed>mdi-account</v-icon>
+            <span class="caption text-lowercase">by person</span>
+          </v-btn>
+        </v-row>
         <v-card flat width="100%" class="pa-3" v-for="project in projects" :key="project.title">
           <v-row wrap :class="`pa-3 project ${project.status}`">
             <v-col cols=12 md=6>
@@ -29,11 +39,8 @@
               </div>
             </v-col>
             <v-col cols=2 sm=4 md=2>
-              <div class="caption grey--text">
-                Status
-              </div>
-              <div>
-                {{project.status}}
+              <div class="float-right">
+                <v-chip small :class="`${project.status} white--text caption my-2`">{{project.status}}</v-chip>
               </div>
             </v-col>
           </v-row>
@@ -49,6 +56,14 @@
 <script lang="ts">
 import Vue from 'vue'
 
+interface IProject {
+  title: string,
+  person: string,
+  due: string,
+  status: string,
+  content: string
+}
+
 export default Vue.extend({
   name: 'Dashboard',
 
@@ -63,6 +78,11 @@ export default Vue.extend({
         { title: 'Create a community forum', person: 'Gouken', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!' }
       ]
     }
+  },
+  methods: {
+    sortBy (prop: keyof IProject) {
+      this.projects.sort((a, b) => a[prop] < b[prop] ? -1 : 1)
+    }
   }
 })
 </script>
@@ -76,5 +96,14 @@ export default Vue.extend({
 }
 .project.overdue {
   border-left: 4px solid tomato
+}
+.v-chip.complete {
+  background: #3cd1c2 !important;
+}
+.v-chip.ongoing {
+  background: orange !important;
+}
+.v-chip.overdue {
+  background: tomato !important;
 }
 </style>

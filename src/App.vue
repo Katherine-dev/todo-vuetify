@@ -3,7 +3,7 @@
     <v-container fluid fill-height class="grey lighten-4">
       <v-row style="height:100%">
         <Navbar/>
-        <v-main class="mb-4">
+        <v-main>
         <router-view/>
         </v-main>
       </v-row>
@@ -27,6 +27,9 @@ export default Vue.extend({
 </script>
 
 <style>
+body {
+  height: 100%;
+}
 html {
   overflow: hidden !important;
   scrollbar-width: none;
