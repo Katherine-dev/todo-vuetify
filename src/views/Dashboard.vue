@@ -2,15 +2,28 @@
  <div class="dashboard" style="height:100%; overflow-y:scroll; -webkit-overflow-scrolling: touch;overflow-y: scroll;">
     <v-subheader  class="grey--text ">Dashboard</v-subheader>
       <v-container fill-height class="my-5" style="align-content: flex-start">
+
         <v-row class="mb-3">
-          <v-btn small text color="grey" @click="sortBy(`title`)">
+          <v-tooltip top>
+            <template v-slot:activator="{ on }">
+          <v-btn small text color="grey" @click="sortBy(`title`)" v-on="on">
             <v-icon left small depressed>mdi-folder</v-icon>
             <span class="caption text-lowercase">by project name</span>
           </v-btn>
-          <v-btn small text color="grey" @click="sortBy(`person`)">
+          </template>
+           <span>Sort project by project name</span>
+          </v-tooltip>
+
+          <v-tooltip top>
+            <template v-slot:activator="{ on }">
+          <v-btn small text color="grey" @click="sortBy(`person`)" v-on="on">
             <v-icon left small depressed>mdi-account</v-icon>
             <span class="caption text-lowercase">by person</span>
           </v-btn>
+          </template>
+           <span>Sort project by person</span>
+          </v-tooltip>
+
         </v-row>
         <v-card flat width="100%" class="pa-3" v-for="project in projects" :key="project.title">
           <v-row wrap :class="`pa-3 project ${project.status}`">
