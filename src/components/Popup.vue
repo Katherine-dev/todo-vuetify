@@ -71,6 +71,8 @@ export default class Popup extends Vue {
     (v: string) => (v && v.length >= 3) || 'Minimum length is 3 characters'
   ];
 
+  protected firstSubmit = true;
+
   protected loading = false;
 
   protected submit (): void {
@@ -83,11 +85,16 @@ export default class Popup extends Vue {
         status: 'ongoing',
         due: format(parseISO(this.due), 'do MMM yyyy')
       }
+      this.title = ''
+      this.content = ''
+      this.due = null;
+      (this.$refs.form as Vue & { resetValidation: () => boolean }).resetValidation()
       // async returns promise
       db.collection('projects').add(project)
         .then(() => {
           this.loading = false
           this.dialog = false
+          this.$emit('projectAdded')
         })
     }
   }

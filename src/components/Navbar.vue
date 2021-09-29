@@ -1,5 +1,20 @@
 <template>
   <nav>
+
+    <v-snackbar
+     v-model="snackbar"
+     :timeout="4000"
+     top
+     color="success">
+      <span>
+        Awesome! You added a new project.
+      </span>
+      <v-btn text color="white"
+      @click="snackbar = false">
+        Close
+      </v-btn>
+    </v-snackbar>
+
     <v-app-bar flat app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase grey--text">
@@ -46,7 +61,8 @@
           </p>
         </v-col>
         <v-col align="center" class="mt-4 mb-3">
-          <Popup/>
+          <Popup
+          @projectAdded="snackbar = true"/>
         </v-col>
       </v-row>
       <v-list>
@@ -79,11 +95,13 @@ interface ILinks {
   }
 })
 export default class Navbar extends Vue {
-  protected drawer= false;
+ protected drawer= false;
  protected links: Array<ILinks> = [
    { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/' },
    { icon: 'mdi-folder', text: 'My Projects', route: '/projects' },
    { icon: 'mdi-account', text: 'Team', route: '/team' }
  ];
+
+ protected snackbar = false;
 }
 </script>
