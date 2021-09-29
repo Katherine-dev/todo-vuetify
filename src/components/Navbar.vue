@@ -36,12 +36,17 @@
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app class="primary">
-      <v-row justify="center mt-5">
+      <v-row justify="center" class="mt-5">
         <v-col cols="6">
           <v-avatar size="100">
             <img src="/avatar-2.jpg" />
           </v-avatar>
-          <p class="white--text text-subtitle-1 mt-1">Katherine-dev</p>
+          <p class="white--text text-subtitle-1 mt-1">
+            Katherine-dev
+          </p>
+        </v-col>
+        <v-col align="center" class="mt-4 mb-3">
+          <Popup/>
         </v-col>
       </v-row>
       <v-list>
@@ -60,6 +65,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import Popup from './Popup.vue'
 
 interface ILinks {
   icon: string,
@@ -67,9 +73,13 @@ interface ILinks {
   route: string
 }
 
-@Component
+@Component({
+  components: {
+    Popup
+  }
+})
 export default class Navbar extends Vue {
-  drawer= false;
+   drawer= false;
   links: Array<ILinks> = [
     { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/' },
     { icon: 'mdi-folder', text: 'My Projects', route: '/projects' },
