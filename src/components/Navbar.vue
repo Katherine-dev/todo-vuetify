@@ -7,6 +7,28 @@
         <span>Vuetify</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+
+        <v-menu offset-y>
+          <template v-slot:activator="{on}">
+            <v-btn text color="grey" v-on="on">
+              <v-icon left>
+                mdi-chevron-down
+              </v-icon>
+              Menu
+            </v-btn>
+          </template>
+            <v-list>
+              <v-list-item
+              v-for="link in links"
+              :key="link.text" router
+              :to="link.route">
+              <v-list-item-title class="primary--text">
+                {{link.text}}
+              </v-list-item-title>
+              </v-list-item>
+            </v-list>
+        </v-menu>
+
       <v-btn text color="grey">
         <span>Sign Out</span>
         <v-icon right>mdi-login-variant</v-icon>
