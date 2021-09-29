@@ -1,5 +1,5 @@
 <template>
- <div class="projects" style="height:100%">
+ <div class="projects" style="height:100vh">
 
     <v-subheader class="grey--text">Projects</v-subheader>
 
@@ -26,6 +26,7 @@
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
+import db from '@/fb'
 
   interface IProject {
     title: string,
@@ -35,20 +36,36 @@ import { Component, Vue } from 'vue-property-decorator'
     content: string
   }
 
-@Component
+@Component({
+})
 export default class Projects extends Vue {
-   protected projects: Array<IProject> =[
-     { title: 'Design a new website', person: 'Katherine-dev', due: '1st Jan 2019', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!' },
-     { title: 'Code up the homepage', person: 'Nionoku', due: '10th Jan 2019', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!' },
-     { title: 'Design video thumbnails', person: 'Ryu', due: '20th Dec 2018', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!' },
-     { title: 'Create a community forum', person: 'Gouken', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!' },
-     { title: 'Create a community forum for me', person: 'Katherine-dev', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!' }
-   ]
+  protected projects: Array<IProject> =[]
 
-   protected myProjects () {
-     return this.projects.filter(project => {
-       return project.person === 'Katherine-dev'
-     })
-   }
+  protected myProjects () {
+    return this.projects.filter(project => {
+      return project.person === 'Katherine-dev'
+    })
+  }
+
+  created () {
+    db.collection('projects').onSnapshot(res => {
+      const changes = res.docChanges()
+
+      changes.forEach(change => {
+        if (change.type === 'added') {
+          const newPr = {
+            title: change.doc.data().title,
+            person: change.doc.data().person,
+            status: change.doc.data().status,
+            due: change.doc.data().due,
+            content: change.doc.data().content,
+            id: change.doc.id
+          }
+
+          this.projects.push(newPr)
+        }
+      })
+    })
+  }
 }
 </script>
