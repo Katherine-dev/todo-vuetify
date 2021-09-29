@@ -46,7 +46,7 @@ interface ITeam {
 
 @Component
 export default class Team extends Vue {
-  team: Array<ITeam> = [
+  protected team: Array<ITeam> = [
     { name: 'Nionoku', role: 'Software engineer', avatar: '/avatar-1.jpg' },
     { name: 'Katherine-dev', role: 'Web developer', avatar: '/avatar-2.jpg' },
     { name: 'Chun Li', role: 'Graphic designer', avatar: '/avatar-3.png' },

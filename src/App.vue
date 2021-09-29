@@ -12,18 +12,15 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator'
 import Navbar from '@/components/Navbar.vue'
 
-export default Vue.extend({
-  name: 'App',
+@Component({
   components: {
     Navbar
-  },
-  data: () => ({
-    //
-  })
+  }
 })
+export default class App extends Vue {}
 </script>
 
 <style>

@@ -62,14 +62,14 @@ import db from '@/fb'
 
 @Component
 export default class Popup extends Vue {
-  title = '';
-  content = '';
-  due: any = null;
-  inputRules = [
+  protected title = '';
+  protected content = '';
+  protected due: any = null;
+  protected inputRules = [
     (v: string) => (v && v.length >= 3) || 'Minimum length is 3 characters'
   ];
 
-  submit (): void {
+  protected submit (): void {
     if ((this.$refs.form as Vue & { validate: () => boolean }).validate()) {
       const project = {
         title: this.title,
@@ -84,32 +84,8 @@ export default class Popup extends Vue {
     }
   }
 
-  get formattedDate () {
+  protected get formattedDate () {
     return this.due ? format(parseISO(this.due), 'do MMM yyyy') : ''
   }
 }
 </script>
-
-function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
-  throw new Error('Function not implemented.');
-}
-
-function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
-  throw new Error('Function not implemented.');
-}
-
-function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
-  throw new Error('Function not implemented.');
-}
-
-function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
-  throw new Error('Function not implemented.');
-}
-
-function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
-  throw new Error('Function not implemented.');
-}
-
-function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
-  throw new Error('Function not implemented.');
-}

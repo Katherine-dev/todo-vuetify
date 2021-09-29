@@ -79,11 +79,11 @@ interface ILinks {
   }
 })
 export default class Navbar extends Vue {
-   drawer= false;
-  links: Array<ILinks> = [
-    { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/' },
-    { icon: 'mdi-folder', text: 'My Projects', route: '/projects' },
-    { icon: 'mdi-account', text: 'Team', route: '/team' }
-  ];
+  protected drawer= false;
+ protected links: Array<ILinks> = [
+   { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/' },
+   { icon: 'mdi-folder', text: 'My Projects', route: '/projects' },
+   { icon: 'mdi-account', text: 'Team', route: '/team' }
+ ];
 }
 </script>
