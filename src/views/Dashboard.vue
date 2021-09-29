@@ -51,7 +51,7 @@
                 {{project.due}}
               </div>
             </v-col>
-            <v-col cols=2 sm=4 md=2>
+            <v-col cols=12 sm=4 md=2>
               <div class="float-right">
                 <v-chip small :class="`${project.status} white--text caption my-2`">{{project.status}}</v-chip>
               </div>
