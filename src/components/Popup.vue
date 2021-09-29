@@ -11,16 +11,18 @@
         <h2>Add a new project</h2>
       </v-card-title>
       <v-card-text>
-        <v-form class="px-3">
+        <v-form class="px-3" ref="form">
           <v-text-field
           label="Title"
           v-model="title"
           prepend-icon="mdi-folder"
+          :rules="inputRules"
           ></v-text-field>
           <v-textarea
           label="Information"
           v-model="content"
           prepend-icon="mdi-pencil"
+          :rules="inputRules"
           ></v-textarea>
 
             <v-menu>
@@ -29,10 +31,15 @@
                 :value="formattedDate"
                 label="Due data"
                 prepend-icon="mdi-calendar-range"
+                :rules="inputRules"
                 v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="due"></v-date-picker>
+
+              <v-date-picker
+              v-model="due"
+              :rules="inputRules"
+              ></v-date-picker>
             </v-menu>
 
           <v-btn
@@ -57,9 +64,14 @@ export default class Popup extends Vue {
   title = '';
   content = '';
   due: any = null;
+  inputRules = [
+    (v: string) => (v && v.length >= 3) || 'Minimum length is 3 characters'
+  ];
 
   submit () {
-    console.log(this.title, this.content)
+    if ((this.$refs.form as Vue & { validate: () => boolean }).validate()) {
+      console.log(this.title, this.content)
+    }
   }
 
   get formattedDate () {
