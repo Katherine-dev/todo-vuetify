@@ -26,7 +26,7 @@
             <v-menu>
               <template v-slot:activator="{ on }">
                 <v-text-field
-                :value="due"
+                :value="formattedDate"
                 label="Due data"
                 prepend-icon="mdi-calendar-range"
                 v-on="on"
@@ -49,15 +49,21 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import format from 'date-fns/format'
+import parseISO from 'date-fns/parseISO'
 
 @Component
 export default class Popup extends Vue {
   title = '';
   content = '';
-  due = null;
+  due: any = null;
 
   submit () {
     console.log(this.title, this.content)
+  }
+
+  get formattedDate () {
+    return this.due ? format(parseISO(this.due), 'do MMM yyyy') : ''
   }
 }
 </script>
