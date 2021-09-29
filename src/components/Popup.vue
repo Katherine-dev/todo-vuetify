@@ -58,6 +58,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
+import db from '@/fb'
 
 @Component
 export default class Popup extends Vue {
@@ -68,9 +69,18 @@ export default class Popup extends Vue {
     (v: string) => (v && v.length >= 3) || 'Minimum length is 3 characters'
   ];
 
-  submit () {
+  submit (): void {
     if ((this.$refs.form as Vue & { validate: () => boolean }).validate()) {
-      console.log(this.title, this.content)
+      const project = {
+        title: this.title,
+        content: this.content,
+        person: 'Katherine-dev',
+        status: 'ongoing',
+        due: format(parseISO(this.due), 'do MMM yyyy')
+      }
+      // async returns promise
+      db.collection('projects').add(project)
+        .then(() => console.log('added to db'))
     }
   }
 
@@ -79,3 +89,27 @@ export default class Popup extends Vue {
   }
 }
 </script>
+
+function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
+  throw new Error('Function not implemented.');
+}
+
+function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
+  throw new Error('Function not implemented.');
+}
+
+function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
+  throw new Error('Function not implemented.');
+}
+
+function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
+  throw new Error('Function not implemented.');
+}
+
+function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
+  throw new Error('Function not implemented.');
+}
+
+function person(arg0: Date, person: any, arg2: string, status: string, arg4: string) {
+  throw new Error('Function not implemented.');
+}
