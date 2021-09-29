@@ -1,6 +1,6 @@
 
 <template>
-  <v-dialog max-width="600px">
+  <v-dialog max-width="600px" v-model="dialog">
     <template v-slot:activator="{ on }">
     <v-btn text class="success" v-on="on" >
       Add new project
@@ -45,7 +45,8 @@
           <v-btn
           text
           class="success mx-0 mt-3"
-          @click="submit">
+          @click="submit"
+          :loading="loading">
             Add project
           </v-btn>
         </v-form>
@@ -62,6 +63,7 @@ import db from '@/fb'
 
 @Component
 export default class Popup extends Vue {
+  protected dialog = false;
   protected title = '';
   protected content = '';
   protected due: any = null;
@@ -69,8 +71,11 @@ export default class Popup extends Vue {
     (v: string) => (v && v.length >= 3) || 'Minimum length is 3 characters'
   ];
 
+  protected loading = false;
+
   protected submit (): void {
     if ((this.$refs.form as Vue & { validate: () => boolean }).validate()) {
+      this.loading = true
       const project = {
         title: this.title,
         content: this.content,
@@ -80,7 +85,10 @@ export default class Popup extends Vue {
       }
       // async returns promise
       db.collection('projects').add(project)
-        .then(() => console.log('added to db'))
+        .then(() => {
+          this.loading = false
+          this.dialog = false
+        })
     }
   }
 
